@@ -14,7 +14,7 @@ Completed: Built the Python simulator core with all seven actions:
 }
 ,friction-limited braking, actuation delay, simplified steering, and collision detection. Integrated selected parameters from Tora's CSV and successfully tested dry/wet conditions.
 
-Still needed: Validate the simulator against matching CARLA measurements, confirm the steering-limit assumption, and integrate Manas's scenario bank once its parameters and additional hazards are supported.
+Still needed: rollout computing, T-unavoid, Tconverge, and the w. Validate the simulator against matching CARLA measurements, confirm the steering-limit assumption, and integrate Manas's scenario bank once its parameters and additional hazards are supported.
 
 ### files included
 
