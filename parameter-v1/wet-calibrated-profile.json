@@ -1,0 +1,138 @@
+{
+  "schema_version": "3.0.0",
+  "curve": [
+    {
+      "brake": 0.0,
+      "deceleration_mps2": 0.059027220739693576
+    },
+    {
+      "brake": 0.1,
+      "deceleration_mps2": 0.8397265950277344
+    },
+    {
+      "brake": 0.2,
+      "deceleration_mps2": 1.6365369477489011
+    },
+    {
+      "brake": 0.4,
+      "deceleration_mps2": 3.2454169255400345
+    },
+    {
+      "brake": 0.6,
+      "deceleration_mps2": 3.9945426671175177
+    },
+    {
+      "brake": 0.8,
+      "deceleration_mps2": 3.994542667118406
+    },
+    {
+      "brake": 1.0,
+      "deceleration_mps2": 3.994542667117962
+    }
+  ],
+  "targets": {
+    "soft_mps2": 2.943,
+    "hard_mps2": 3.4335
+  },
+  "validated": true,
+  "validation": [
+    {
+      "name": "validate-soft-30",
+      "target_mps2": 2.943,
+      "measured_mps2": 2.9354666853276257,
+      "deceleration_relative_error": 0.0025597399498383934,
+      "kinematic_distance_reference_m": 11.79800357656511,
+      "stopping_distance_relative_error": 0.024688444700020018,
+      "passed": true
+    },
+    {
+      "name": "validate-hard-30",
+      "target_mps2": 3.4335,
+      "measured_mps2": 3.5103051645561933,
+      "deceleration_relative_error": 0.022369350387707397,
+      "kinematic_distance_reference_m": 10.11267550986751,
+      "stopping_distance_relative_error": 0.010386487403626594,
+      "passed": true
+    },
+    {
+      "name": "validate-soft-50",
+      "target_mps2": 2.943,
+      "measured_mps2": 2.9497720902238456,
+      "deceleration_relative_error": 0.0023010840040249766,
+      "kinematic_distance_reference_m": 32.772512674179666,
+      "stopping_distance_relative_error": 0.009328897847590297,
+      "passed": true
+    },
+    {
+      "name": "validate-hard-50",
+      "target_mps2": 3.4335,
+      "measured_mps2": 3.5210342231191127,
+      "deceleration_relative_error": 0.025494167211042012,
+      "kinematic_distance_reference_m": 28.090725149238082,
+      "stopping_distance_relative_error": 0.0056648359855506845,
+      "passed": true
+    }
+  ],
+  "training_sha256": "e8feece3ceb5de635b3f96ebbde0c02a37be29b27525b697b2323e8af0ae3502",
+  "note": "Vehicle/map/weather/speed-envelope specific; empirical interpolation only",
+  "source_files_sha256": {
+    "grounding/carla_sim.py": "e56acb916f73f7aefdf0a7c83321658939287620b46a78cf965d898d71a8648d",
+    "grounding/import_external.py": "cd3da30b9d73432d19cae30dbef324fc803571129800dfe1c9c6841e8817c5a6",
+    "grounding/protocol.py": "d24b985b5bea063d5e7287c0c74ebf18436c65c4717d746ad1ed2540a45045e5",
+    "grounding/__init__.py": "2bf9d8f838691ecb416985fa4846316c39d5b555981a6b313d5ad4b402dd82c8",
+    "grounding/runtime.py": "77750bc2b3bc416714716ce2b19c62879eb7c291bd07eaf1b70a264953e5f7fd",
+    "grounding/window_sweep.py": "f44c020e6e562f0736ae4a0baf25c2229d2f020890705f5044479619aea93ca3",
+    "grounding/experiment.py": "ef4fee5f608817c476c4ec92d6f28d7658493f956245a114b6ccaa934cf49dbc",
+    "grounding/timing_replay.py": "05258eca4003a171c5b5ba812de7bc32f77dca2c5f6dd10e25c6ccaba0598ef3",
+    "grounding/steering_probe.py": "f7c40cae8801b848717ec2016fad25b058e892a9b8e6cefdabb6bd0db45f26a1",
+    "grounding/windows.py": "844534a3abae67ed01b9c8450d36e5136a1bec5f4edcc71c7bf02fb23bd06cdb",
+    "grounding/calibrate.py": "38122342a70ac52d555ca5b988d4fe3590194a227b055a9ff92053b42a862f63",
+    "grounding/report.py": "c43d4915df3d777aa6928288235f487dd6f073b4378ee946cbaff76c51ec6bc3",
+    "grounding/validation.py": "924b915a6477aca0c7ee5cc4d52ca7d6a79392fd36f60825d8fa798699fb4c42",
+    "grounding/calibration.py": "979063ec60128a2fc353c1ed804d5c0ff950ba94319e5e8ac595a95cf4b9b249"
+  },
+  "source_targets_sha256": "98224b02d4710cb3cc9d821168ee546b47761ca79fcbd8913e2129a2ce14fea3",
+  "physics": {
+    "mass_kg": 1845.0,
+    "drag_coefficient": 0.15000000596046448,
+    "weather": "WeatherParameters(cloudiness=5.000000, precipitation=0.000000, precipitation_deposits=50.000000, wind_intensity=10.000000, sun_azimuth_angle=-1.000000, sun_altitude_angle=45.000000, fog_density=3.000000, fog_distance=0.750000, fog_falloff=0.100000, wetness=0.000000, scattering_intensity=1.000000, mie_scattering_scale=0.030000, rayleigh_scattering_scale=0.033100, dust_storm=0.000000)",
+    "tire_friction": [
+      0.5,
+      0.5,
+      0.5,
+      0.5
+    ],
+    "max_steer_angle_deg": 69.99999237060547,
+    "wheel_radius_cm": [
+      37.0,
+      37.0,
+      37.0,
+      37.0
+    ],
+    "max_brake_torque_nm": [
+      1400.0,
+      1400.0,
+      1400.0,
+      1400.0
+    ]
+  },
+  "calibration_dt_s": 0.001,
+  "envelope": {
+    "map": "Carla/Maps/Town04",
+    "tire_friction": 0.5,
+    "brake_torque_scale": 2.0,
+    "max_brake_torque_nm": [
+      1400.0,
+      1400.0,
+      1400.0,
+      1400.0
+    ],
+    "speed_min_mps": 8.333333333333334,
+    "speed_max_mps": 13.88888888888889,
+    "mass_kg": 1845.0,
+    "drag_coefficient": 0.15000000596046448,
+    "weather": "WeatherParameters(cloudiness=5.000000, precipitation=0.000000, precipitation_deposits=50.000000, wind_intensity=10.000000, sun_azimuth_angle=-1.000000, sun_altitude_angle=45.000000, fog_density=3.000000, fog_distance=0.750000, fog_falloff=0.100000, wetness=0.000000, scattering_intensity=1.000000, mie_scattering_scale=0.030000, rayleigh_scattering_scale=0.033100, dust_storm=0.000000)"
+  },
+  "lateral_validated": false,
+  "lateral_note": "Seven-action steering is measured separately; brake validation does not validate lateral/combined limits"
+}

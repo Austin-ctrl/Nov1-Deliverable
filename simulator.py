@@ -45,7 +45,7 @@ class Simulator:
         self.pedestrians = scenario["pedestrians"]
         self.parked_boundary = scenario.get("parked_car_boundary")
         self.max_time = float(scenario.get("max_time", 5.0))  # defaults to 5
-        self.max_x = float(scenario.get("max_x", 20.0))  # if not specified in the scenario, it will default to 20
+        self.max_x = float(scenario["max_x"])  # if not specified in the scenario, it will default to 20
 
         # validates parameter values
         if self.v < 0 or self.mu < 0 or self.delay < 0 or self.lateral_ramp < 0:
@@ -74,7 +74,7 @@ class Simulator:
         if action == "brake_soft":
             return min(0.3 * G, limit), 0.0
         if action == "brake_hard":
-            return limit, 0.0
+            return min(0.7 * G, limit), 0.0
         if action == "steer_left":
             return 0.0, limit
         if action == "steer_right":
@@ -86,7 +86,7 @@ class Simulator:
             return combined, -combined
         raise ValueError(f"Unknown action: {action!r}")
 
-    def step(self, action, dt):  # main thing that moves the car
+    def step(self, action, dt, commandTime = 0.0):  # main thing that moves the car
         """Advance by dt seconds; return (state, done, info).
 
         One constant action is selected per rollout. To compare actions,
@@ -96,7 +96,7 @@ class Simulator:
 
         main.py() repeatly calls step until the sim finsihes
         """
-
+        # input validation
         if not self.reset_called:
             raise RuntimeError("Call reset(scenario) before step()")
         if action not in ACTIONS:
@@ -109,6 +109,9 @@ class Simulator:
             self.action = action
         elif action != self.action:
             raise ValueError("This baseline requires one fixed action per rollout")
+        # input validation
+
+        activationTime = commandTime + self.delay
 
         decel, lateral = self._accelerations(action)  # ACCERATION IS CALCUTLTED
         # Split a step at the actuation-delay boundary so commands cannot
@@ -117,10 +120,10 @@ class Simulator:
         while remaining > 1e-12 and not self.done: # 0.000000000001, try to avoid floating point rounding
             h = remaining  # h is the current portion of time step being processed
              # if the current time step crosses the actuation delay, split the step at the delay boundary
-            if self.time < self.delay < self.time + h:  
-                h = self.delay - self.time
-            if self.time >= self.delay: # Only apply the selected driving action once the actuation delay has passed.
-                since = self.time - self.delay  # lateral ramp calc
+            if self.time < activationTime < self.time + h:  
+                h = activationTime - self.time
+            if self.time >= activationTime: # Only apply the selected driving action once the actuation delay has passed.
+                since = self.time - activationTime  # lateral ramp calc
                 ramp_fraction = (min(1.0, since / self.lateral_ramp)
                                  if self.lateral_ramp > 0 else 1.0)
                 # v_new = v_old - a_braking * change in time

@@ -3,11 +3,11 @@ from simulator import Simulator, ACTIONS
 
 DT = 0.001
 
-def run(action):
+def run(action, commandTime = 0.3):
     sim = Simulator()
     sim.reset(SCENARIO, seed=42)
     while True:
-        state, done, info = sim.step(action, DT)
+        state, done, info = sim.step(action, DT, commandTime = commandTime)
         if done:
             return state, info
 

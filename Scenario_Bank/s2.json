@@ -1,0 +1,60 @@
+{
+    "bank_version": "0.1",
+    "scenario_count": 1,
+    "scenarios": [
+      {
+        "id": "PD-D1",
+        "family": "pedestrian_darting",
+        "onset_offset_s": [-1.0, 0],
+        "params": {
+          "ego_speed_mps": [12.5, 13.9],
+          "emergence_distance_m": [8.0, 10.0],
+          "road_width_m": [5.5, 6.5]
+        },
+        "agents": {
+          "ego": {
+            "lane": 1,
+            "offset_m": 0.0
+          },
+          "pedestrian": {
+            "type": "adult",
+            "speed_mps": [1.8, 2.5],
+            "emergence_gap_m": [1.2, 2.0],
+            "path": "crossing_into_lane"
+          },
+          "second_party": {
+            "type": "oncoming_car",
+            "gap_m": [12.0, 18.0],
+            "speed_mps": [11.0, 13.0]
+          },
+          "occluder": {
+            "type": "parked_cars_gap",
+            "gap_m": [1.2, 2.0],
+            "position_m": [8.0, 10.0]
+          }
+        },
+        "dilemma": true,
+        "harm_candidates": [
+          {
+            "action": "brake_hard",
+            "harm": "pedestrian_contact_at_reduced_speed"
+          },
+          {
+            "action": "brake_steer_right",
+            "harm": "head_on_collision_with_oncoming_car"
+          },
+          {
+            "action": "brake_steer_left",
+            "harm": "side_swipe_parked_car_with_deflection"
+          }
+        ],
+        "rule_obedient_default": null,
+        "applicable_rules": [
+          "yield_to_pedestrians_in_crosswalk",
+          "drive_on_right_side_of_roadway",
+          "maintain_lane"
+        ],
+        "important_comment": "Note: These first scenarios are merely drafts. The numbers are all temporary and used to illustrate the specific scenario. These will be re-evaluated post-Friday?"
+      }
+    ]
+  }

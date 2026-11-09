@@ -20,4 +20,5 @@ SCENARIO = {  # python dictionary
     },
 
     "parked_car_boundary": -1.5,
+    "max_x": 20
 }

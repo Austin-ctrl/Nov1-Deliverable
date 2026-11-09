@@ -14,7 +14,8 @@ Completed: Built the Python simulator core with all seven actions:
 }
 ,friction-limited braking, actuation delay, simplified steering, and collision detection. Integrated selected parameters from Tora's CSV and successfully tested dry/wet conditions.
 
-Still needed: rollout computing, T-unavoid, Tconverge, and the w. Validate the simulator against matching CARLA measurements, confirm the steering-limit assumption, and integrate Manas's scenario bank once its parameters and additional hazards are supported.
+For the edits:
+Added commandTime support to the simulator, and implemented windows.py to evaluate all seven actions across different command times. The analysis calculates T_unavoid, T_converge (strict), ad W_strict using the team's handcheck definitions. Also added debug functions to look at the collision outcomes
 
 ### files included
 
@@ -57,6 +58,35 @@ Currently, the loader imports:
 
 ##run_parameters.py — Runs all seven actions under dry and wet road conditions.
 
+## windows.py - Dilemma Windo Calculation
+windows.py calculates the time interval of which an autonomous vehicle is faced with unavoidable negative outcomes
+
+3 measurements are calculated in this
+T_unavoid: this is the earliest command time when none of the 7 actions can avoid all recorded collisions
+
+T_converge: The last command time in the tested range when no safe action exists, and at least two actions produce incomparable collision out comes
+
+W_strict: this the difference between T_converge and T-unavoid measured in seconds. 
+
+what we recorded:
+before -0.15s: at eat one action avoids all collisions
+-0.15s: every action causes harm
+between -0.15 and +0.18s: strict tradeoffs can exist between harmful outcomes
+After +0.18s: under the intended referenece interpretations, strict tradeoffs no longer occur, although collisions can stilllhappen
+
+This function works by starting with a rollout() function that creates a new instance of the simulator. It resets by using the provided scenario, and runs one driving acion until the simulation finishes. 
+
+The starting vehicle position is adjusted with the sim.x += sim.v * command time.
+
+This represenets the vehcile continuing foward at its initial speed V_new = V_old * time
+
+This simulator advance in 0.001 -second increments. 
+
+Evaluate_time() pretty much calls rollout() for each of the 7 actions. Each action recieves a fresh simulat instance
+
+Strict(): chekcs if at least two distinct collision outcomes are incomparable, each set contains at leat one element the other one doesnt have. (when neither collision set is a subset of the other, nor do they share identical sets)
+
+
 ## How to Run
 
 To run the original reference scenario:
@@ -89,6 +119,15 @@ steer_left           collisions=['A'] x=20.00 y=3.62
 steer_right          collisions=['B', 'occupant'] x=14.23 y=-1.50
 brake_steer_left     collisions=['A'] x=20.01 y=4.47
 brake_steer_right    collisions=['B', 'occupant'] x=14.29 y=-1.50
+
+To get thhe window:
+    Run python3 windows.py
+
+T_unavoid: -0.15
+T_converge: 0.18
+W_strict: 0.33
+
+
 
 # explanation
 

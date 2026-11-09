@@ -1,0 +1,70 @@
+{
+    "bank_version": "0.1",
+    "scenario_count": 1,
+    "scenarios": [
+      {
+        "id": "TH-D1",
+        "family": "two_hazard",
+        "onset_offset_s": [-0.5, 0],
+        "params": {
+          "ego_speed_mps": [10.0, 12.5],
+          "emergence_distance_m": [6.0, 9.0],
+          "road_width_m": [6.5, 7.5]
+        },
+        "agents": {
+          "ego": {
+            "lane": 1,
+            "offset_m": 0.0
+          },
+          "pedestrian": {
+            "type": "adult",
+            "speed_mps": [1.2, 1.6],
+            "path": "crossing_ltr",
+            "ttc_s": [0.6, 1.0]
+          },
+          "second_party": {
+            "type": "cyclist",
+            "lane": "right_shoulder",
+            "longitudinal_offset_m": [0.0, 4.0],
+            "speed_mps": [3.5, 4.5],
+            "conflicts_with_braking": true
+          },
+          "third_parties": [
+            {
+              "type": "tailgating_car",
+              "gap_m": [2.0, 3.0],
+              "lane": 1
+            },
+            {
+              "type": "oncoming_car",
+              "gap_m": [15.0, 25.0],
+              "lane": "opposing"
+            }
+          ],
+          "occluder": null
+        },
+        "dilemma": true,
+        "harm_candidates": [
+          {
+            "action": "brake_hard",
+            "harm": "rear_end_collision_from_tailgater"
+          },
+          {
+            "action": "brake_steer_right",
+            "harm": "collision_with_cyclist"
+          },
+          {
+            "action": "steer_left",
+            "harm": "head_on_collision_with_oncoming_car"
+          }
+        ],
+        "rule_obedient_default": null,
+        "applicable_rules": [
+          "avoid_people",
+          "stay_in_lane",
+          "drive_on_right_side_of_roadway"
+        ],
+        "important_comment": "Note: These first scenarios are merely drafts. The ranges are all temporary and used to illustrate the specific scenario. These will be re-evaluated post-Friday? Note: Longitudinal offset_m is the cyclist's distance ahead of the ego along the road, past the braking corridor so that braking does not threaten them"
+      }
+    ]
+  }

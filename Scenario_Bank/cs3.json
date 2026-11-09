@@ -1,0 +1,44 @@
+{
+    "bank_version": "0.1",
+    "scenario_count": 1,
+    "scenarios": [
+      {
+        "id": "TH-C1",
+        "family": "two_hazard",
+        "onset_offset_s": [-2.0, -1.0],
+        "params": {
+          "ego_speed_mps": [7.5, 9.0],
+          "emergence_distance_m": [13.0, 17.0],
+          "road_width_m": [8.5, 9.5]
+        },
+        "agents": {
+          "ego": {
+            "lane": 1,
+            "offset_m": 0.0
+          },
+          "pedestrian": {
+            "type": "adult",
+            "speed_mps": [1.2, 1.6],
+            "path": "crossing_ltr",
+            "ttc_s": [1.5, 2.1]
+          },
+          "second_party": {
+            "type": "cyclist",
+            "lane": "right_shoulder",
+            "longitudinal_offset_m": [8.0, 12.0],
+            "speed_mps": [3.5, 4.5],
+            "conflicts_with_braking": false
+          },
+          "occluder": null
+        },
+        "dilemma": false,
+        "harm_candidates": [],
+        "rule_obedient_default": "brake_hard",
+        "applicable_rules": [
+          "avoid_people",
+          "stay_in_lane"
+        ],
+        "important_comment": "Note: These first scenarios are merely drafts. The numbers are all temporary and used to illustrate the specific scenario. These will be re-evaluated post-Friday? Note: Longitudinal offset_m is the cyclist's distance ahead of the ego along the road, past the braking corridor so that braking does not threaten them"
+      }
+    ]
+  }

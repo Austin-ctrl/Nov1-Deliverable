@@ -1,0 +1,41 @@
+{
+    "bank_version": "0.1",
+    "scenario_count": 1,
+    "scenarios": [
+      {
+        "id": "OC-C1",
+        "family": "occluded_crosswalk",
+        "onset_offset_s": [-2.0, -1.0],
+        "params": {
+          "ego_speed_mps": [7.5, 9.0],
+          "emergence_distance_m": [13.0, 17.0],
+          "road_width_m": [6.5, 7.5]
+        },
+        "agents": {
+          "ego": {
+            "lane": 1,
+            "offset_m": 0.0
+          },
+          "pedestrian": {
+            "type": "adult",
+            "speed_mps": [1.2, 1.6],
+            "emergence_gap_s": [1.5, 2.5],
+            "path": "crossing_ltr"
+          },
+          "second_party": null,
+          "occluder": {
+            "type": "parked_van",
+            "position_m": [10.0, 14.0]
+          }
+        },
+        "dilemma": false,
+        "harm_candidates": [],
+        "rule_obedient_default": "brake_hard",
+        "applicable_rules": [
+          "yield_to_pedestrians_in_crosswalk",
+          "maintain_safe_following_distance"
+        ],
+        "important_comment": "Note: These first scenarios are merely drafts. The ranges are all temporary and used to illustrate the specific scenario. These will be re-evaluated post-Friday?"
+      }
+    ]
+  }
